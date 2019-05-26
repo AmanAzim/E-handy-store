@@ -1,6 +1,0 @@
-
-
-    font-family: 'Oswald', sans-serif;
-
-    font-family: 'Prosto One', cursive;
-
