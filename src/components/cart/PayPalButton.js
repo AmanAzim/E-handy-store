@@ -7,6 +7,8 @@ class PayPalButton extends Component {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             console.log("The payment was succeeded!", payment);
+            this.props.clearCart();
+            this.props.history.push('/');
             // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
         }
 
@@ -24,12 +26,12 @@ class PayPalButton extends Component {
         }
 
         let env = 'sandbox'; // you can set here to 'production' for production
-        let currency = 'USD'; // or you can set this value from your props or state
-        let total = 1; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
+        let currency = 'EUR'; // or you can set this value from your props or state
+        //et total = 1; // same as above, this is the total amount (based on currency) to be paid by using Paypal express checkout
         // Document on Paypal's currency code: https://developer.paypal.com/docs/classic/api/currency_codes/
-        console.log('paypal',this.props)
+
         const client = {
-            sandbox:    'YOUR-SANDBOX-APP-ID',
+            sandbox:    'AU8laELdXXl-7xCUeRdzUN7DKMmXPqukW0cdS6CrUt5aweNtstFzEUvdX8vVdzhDP6GXToI3sq6W5sku',
             production: 'YOUR-PRODUCTION-APP-ID',
         }
         // In order to get production's app-ID, you will have to send your app to Paypal for approval first
@@ -40,7 +42,7 @@ class PayPalButton extends Component {
 
         // NB. You can also have many Paypal express checkout buttons on page, just pass in the correct amount and they will work!
         return (
-            <PaypalExpressBtn env={env} client={client} currency={currency} total={total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />
+            <PaypalExpressBtn env={env} client={client} currency={currency} total={this.props.total} onError={onError} onSuccess={onSuccess} onCancel={onCancel} />
         );
     }
 }
