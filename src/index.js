@@ -6,13 +6,34 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 import {ProductProvider} from './context';
 
+////////////Redux/////////////////////////////////////
+import {createStore, applyMiddleware, compose} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './store/reducer';
+import thunk from 'redux-thunk';
+
+const logger=(store)=>{
+  return (next)=>{
+      return (action)=>{
+          console.log('Dispatching',action);
+          const result=next(action);
+          console.log('Next state',store.getState());
+          return result;
+      };
+  };
+};
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;// for Redux Devtool
+const store=createStore(reducer, composeEnhancers(applyMiddleware(logger, thunk)));
+////////////Redux/////////////////////////////////////
 
 ReactDOM.render(
-    <ProductProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ProductProvider>
+    <Provider store={store}>
+        <ProductProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ProductProvider>
+    </Provider>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
