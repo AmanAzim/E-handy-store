@@ -19,6 +19,11 @@ const reducer=(state=initialState, action)=>{
               ...state,
               products: action.products
             };
+        case actionTypeName.HANDEL_DETAIL:
+            return {
+                ...state,
+                detailProduct:action.detailProduct
+            }
     }
     return state;
 };

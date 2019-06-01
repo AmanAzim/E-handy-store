@@ -5,6 +5,7 @@ import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import * as actions from '../store/actions';
 
 const ProductWrapper=styled.div`
     
@@ -22,7 +23,7 @@ class Product extends Component {
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
                 <div className="card">
 
-                    <div className="img-container py-5" onClick={()=>this.context.handelDetail(id)}>
+                    <div className="img-container py-5" onClick={()=>this.props.onHandelDetail(id)}>
 
                         <NavLink to="/details"><img src={img} alt="product" className="card-img-top"/></NavLink>
 
@@ -59,9 +60,9 @@ const mapStateToProps=(state)=>{
 };
 const mapDispatchToProps=(dispatch)=>{
     return {
-
+        onHandelDetail:(id)=>dispatch(actions.handelDetail(id))
     }
 };
 
-export default Product;
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
 

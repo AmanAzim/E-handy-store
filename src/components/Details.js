@@ -9,7 +9,7 @@ class Details extends Component {
     static contextType=ProductContext;
 
     render() {
-        const {id, title, company, info, img, price, inCart}=this.context.detailProduct;
+        const {id, title, company, info, img, price, inCart}=this.props.detailProduct;
         return (
             <div className="container py-2">
                 {/*Title*/}
@@ -46,7 +46,7 @@ class Details extends Component {
 
 const mapStateToProps=(state)=>{
     return {
-
+        detailProduct:state.detailProduct
     }
 };
 const mapDispatchToProps=(dispatch)=>{
@@ -55,4 +55,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
 };
 
-export default Details;
+export default connect(mapStateToProps, mapDispatchToProps)(Details);

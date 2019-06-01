@@ -1,1 +1,2 @@
 export const SETPRODUCTS='SETPRODUCTS';
+export const HANDEL_DETAIL='HANDEL_DETAIL';
