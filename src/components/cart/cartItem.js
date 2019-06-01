@@ -1,5 +1,6 @@
 import React,{useContext} from 'react';
 import {ProductContext} from '../../context';
+import {connect} from 'react-redux';
 
 const CartItem = (props) => {
     const context=useContext(ProductContext);
@@ -45,6 +46,17 @@ const CartItem = (props) => {
             </div>
         </div>
     );
+};
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
 };
 
 export default CartItem;

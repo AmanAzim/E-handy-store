@@ -4,7 +4,7 @@ import './Modal.css';
 import {ProductContext} from '../../context';
 import {ButtonContainerDark} from '../Button';
 import Styled from 'styled-components';
-
+import {connect} from 'react-redux';
 
 class Modal extends Component {
 
@@ -45,5 +45,16 @@ class Modal extends Component {
         return (modal);
     }
 }
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
+};
 
 export default withRouter(Modal);

@@ -1,6 +1,7 @@
 import React,{useContext} from 'react';
 import {ProductContext} from '../../context';
 import CartItem from './cartItem';
+import {connect} from 'react-redux';
 
 const CartList = () => {
 
@@ -14,6 +15,17 @@ const CartList = () => {
             }
         </div>
     );
+};
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
 };
 
 export default CartList;

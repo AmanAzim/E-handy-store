@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 const ProductWrapper=styled.div`
     
@@ -49,6 +50,17 @@ Product.propTypes={
         price:PropTypes.number,
         inCart:PropTypes.bool,
     }).isRequired
+};
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
 };
 
 export default Product;

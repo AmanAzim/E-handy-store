@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import PayPalButton from './PayPalButton';
 import {ProductContext} from '../../context';
+import {connect} from 'react-redux';
 
 const CartTotal = (props) => {
 
@@ -23,6 +24,17 @@ const CartTotal = (props) => {
             </div>
         </React.Fragment>
     );
+};
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
 };
 
 export default CartTotal;

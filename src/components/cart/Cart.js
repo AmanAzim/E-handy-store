@@ -5,6 +5,7 @@ import CartColumns from './CartColumns';
 import EmptyCart from './emptyCart';
 import CartList from './cartList';
 import CartTotal from './cartTotal';
+import {connect} from 'react-redux';
 
 class Cart extends Component {
     static contextType=ProductContext;
@@ -31,5 +32,16 @@ class Cart extends Component {
         );
     }
 }
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
+};
 
 export default Cart;

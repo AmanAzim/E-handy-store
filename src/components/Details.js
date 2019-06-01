@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import {ButtonContainerDark} from './Button';
+import {connect} from 'react-redux';
 
 class Details extends Component {
 
@@ -42,5 +43,16 @@ class Details extends Component {
         );
     }
 }
+
+const mapStateToProps=(state)=>{
+    return {
+
+    }
+};
+const mapDispatchToProps=(dispatch)=>{
+    return {
+
+    }
+};
 
 export default Details;
