@@ -23,7 +23,7 @@ const logger=(store)=>{
   };
 };
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;// for Redux Devtool
-const store=createStore(reducer, composeEnhancers(applyMiddleware(logger, thunk)));
+export const store=createStore(reducer, composeEnhancers(applyMiddleware(logger, thunk)));
 ////////////Redux/////////////////////////////////////
 
 ReactDOM.render(

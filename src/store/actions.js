@@ -1,6 +1,6 @@
 import * as actionTypeName from './action-type-names';
 import {storeProducts, detailProduct} from '../data';
-import reducer from './reducer'
+import {store} from '../index';
 
 export const asyn_setProducts=()=>{
     return (dispatch)=>{
@@ -21,14 +21,12 @@ const setProducts=(products)=>{
 };
 ////////////////////////////////////////////////
 
-const getItem=(id ,products)=>{
-    return (dispatch, getState)=>{
-        return getState().products.find((product) => {
-            return product.id === id;
-        });
-        //console.log('product', product)
-        //return product;
-    }
+const getItem=(id)=>{
+    const product= store.getState().products.find((product) => {
+        return product.id === id;
+    });
+    console.log('product', product);
+    return product;
 };
 export const handelDetail=(id)=>{
     return {
