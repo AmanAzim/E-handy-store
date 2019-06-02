@@ -27,7 +27,7 @@ class Product extends Component {
 
                         <NavLink to="/details"><img src={img} alt="product" className="card-img-top"/></NavLink>
 
-                        <button className="cart-btn" disabled={inCart} onClick={()=>{this.context.addToCart(id);  this.context.openModal(id);}}>
+                        <button className="cart-btn" disabled={inCart} onClick={()=>{this.props.onAddToCart(id);  this.props.onOpenModal(id);}}>
                             {inCart? (<p className="mb-0">In Cart</p>):(<i className="fas fa-cart-plus"/>)}
                         </button>
 
@@ -60,7 +60,9 @@ const mapStateToProps=(state)=>{
 };
 const mapDispatchToProps=(dispatch)=>{
     return {
-        onHandelDetail:(id)=>dispatch(actions.handelDetail(id))
+        onHandelDetail:(id)=>dispatch(actions.handelDetail(id)),
+        onAddToCart:(id)=>dispatch(actions.asyn_addToCart(id)),
+        onOpenModal:(id)=>dispatch(actions.openModal(id))
     }
 };
 

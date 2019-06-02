@@ -3,6 +3,7 @@ import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import {ButtonContainerDark} from './Button';
 import {connect} from 'react-redux';
+import * as actions from "../store/actions";
 
 class Details extends Component {
 
@@ -33,7 +34,7 @@ class Details extends Component {
                         {/*Buttons*/}
                         <div>
                             <NavLink to="/"><ButtonContainerDark>Back to Products</ButtonContainerDark></NavLink>
-                            <ButtonContainerDark cart disabled={inCart} onClick={()=>{this.context.addToCart(id); this.context.openModal(id);}}>{/*We can also pass props to styled components like "cart" here*/}
+                            <ButtonContainerDark cart disabled={inCart} onClick={()=>{this.props.onAddToCart(id);  this.props.onOpenModal(id);}}>{/*We can also pass props to styled components like "cart" here*/}
                                 {inCart? 'In Cart':'Add to Cart'}
                             </ButtonContainerDark>
                         </div>
@@ -51,7 +52,8 @@ const mapStateToProps=(state)=>{
 };
 const mapDispatchToProps=(dispatch)=>{
     return {
-
+        onAddToCart:(id)=>dispatch(actions.asyn_addToCart(id)),
+        onOpenModal:(id)=>dispatch(actions.openModal(id))
     }
 };
 

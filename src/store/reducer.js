@@ -23,7 +23,31 @@ const reducer=(state=initialState, action)=>{
             return {
                 ...state,
                 detailProduct:action.detailProduct
-            }
+            };
+        case actionTypeName.ADD_TO_CART:
+            return {
+                ...state,
+                products:action.tempProducts,
+                cart:[...state.cart, action.product]
+            };
+        case actionTypeName.ADD_TOTAL:
+            return {
+                ...state,
+                cartSubtotal:action.cartSubtotal,
+                cartTax:action.cartTax,
+                cartTotal:action.cartTotal
+            };
+        case actionTypeName.OPEN_MODAL:
+            return {
+                ...state,
+                modalProduct:action.modalProduct,
+                modalOpen:action.modalOpen
+            };
+        case actionTypeName.CLOSE_MODAL:
+            return {
+                ...state,
+                modalOpen:action.modalOpen
+            };
     }
     return state;
 };

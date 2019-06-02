@@ -5,6 +5,7 @@ import {ProductContext} from '../../context';
 import {ButtonContainerDark} from '../Button';
 import Styled from 'styled-components';
 import {connect} from 'react-redux';
+import * as actions from "../../store/actions";
 
 class Modal extends Component {
 
@@ -15,11 +16,11 @@ class Modal extends Component {
         //console.log(this.props.location);//Will give the full path address of current route
         //console.log(this.props.match);//Will give the path address that matches to all the paths
         //console.log(this.props.history);
-        const {img, title, price}=this.context.modalProduct;
+        const {img, title, price}=this.props.modalProduct;
 
         let modal=null;
 
-        if(this.context.modalOpen){
+        if(this.props.modalOpen){
             modal=(
                 <div className="ModalContainer">
                     <div className="container">
@@ -31,10 +32,10 @@ class Modal extends Component {
                                 <h5 className="text-muted">Price: ${price}</h5>
 
                                 <NavLink to={this.props.location.pathname}>
-                                    <ButtonContainerDark onClick={()=>this.context.closeModal()}>Continue Shopping</ButtonContainerDark>
+                                    <ButtonContainerDark onClick={()=>this.props.onCloseModal()}>Continue Shopping</ButtonContainerDark>
                                 </NavLink>
 
-                                <NavLink to="/cart"><ButtonContainerDark cart onClick={()=>this.context.closeModal()}>Go to Cart</ButtonContainerDark></NavLink>
+                                <NavLink to="/cart"><ButtonContainerDark cart onClick={()=>this.props.onCloseModal()}>Go to Cart</ButtonContainerDark></NavLink>
                             </div>
                         </div>
                     </div>
@@ -48,13 +49,14 @@ class Modal extends Component {
 
 const mapStateToProps=(state)=>{
     return {
-
+        modalProduct:state.modalProduct,
+        modalOpen:state.modalOpen
     }
 };
 const mapDispatchToProps=(dispatch)=>{
     return {
-
+        onCloseModal:()=>dispatch(actions.closeModal())
     }
 };
 
-export default withRouter(Modal);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Modal));
