@@ -12,7 +12,7 @@ class Cart extends Component {
 
     render() {
         let content='';
-        if(this.context.cart.length>0){
+        if(this.props.cart.length>0){
             content=(
                 <React.Fragment>
                     <Title name="Your" title="Cart"/>
@@ -35,13 +35,9 @@ class Cart extends Component {
 
 const mapStateToProps=(state)=>{
     return {
-
-    }
-};
-const mapDispatchToProps=(dispatch)=>{
-    return {
-
+        cart:state.cart,
     }
 };
 
-export default Cart;
+
+export default connect(mapStateToProps)(Cart);

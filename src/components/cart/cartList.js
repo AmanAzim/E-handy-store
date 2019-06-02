@@ -3,13 +3,13 @@ import {ProductContext} from '../../context';
 import CartItem from './cartItem';
 import {connect} from 'react-redux';
 
-const CartList = () => {
+const CartList = (props) => {
 
     const context=useContext(ProductContext);
 
     return (
         <div className="container-fluid">
-            {   context.cart.map(item=>{
+            {   props.cart.map(item=>{
                     return <CartItem key={item.id} item={item}/>
                 })
             }
@@ -19,13 +19,8 @@ const CartList = () => {
 
 const mapStateToProps=(state)=>{
     return {
-
-    }
-};
-const mapDispatchToProps=(dispatch)=>{
-    return {
-
+        cart:state.cart,
     }
 };
 
-export default CartList;
+export default connect(mapStateToProps)(CartList);

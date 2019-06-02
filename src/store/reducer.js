@@ -48,6 +48,15 @@ const reducer=(state=initialState, action)=>{
                 ...state,
                 modalOpen:action.modalOpen
             };
+        case actionTypeName.CLEAR_CART:
+            return {
+                ...state,
+                products:action.products,
+                cartSubtotal:action.cartSubtotal,
+                cartTax:action.cartTax,
+                cartTotal:action.cartTotal,
+                cart:action.cart
+            }
     }
     return state;
 };

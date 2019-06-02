@@ -92,3 +92,20 @@ export const closeModal=()=>{
     };
 };
 //////////////////////////////////////////////////////////
+export const clearCart=()=>{
+    let tempProducts=[...store.getState().products];
+    tempProducts.map(item=>{
+        item.inCart=false;
+        item.count=0;
+        item.total=0;
+    });
+
+    return {
+        type:actionTypeName.CLEAR_CART,
+        products:tempProducts,
+        cartSubtotal:0,
+        cartTax:0,
+        cartTotal:0,
+        cart:[]
+    }
+};
