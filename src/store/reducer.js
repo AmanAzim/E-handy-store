@@ -56,7 +56,23 @@ const reducer=(state=initialState, action)=>{
                 cartTax:action.cartTax,
                 cartTotal:action.cartTotal,
                 cart:action.cart
-            }
+            };
+        case actionTypeName.INCREMENT:
+            return {
+                ...state,
+                cart:action.cart
+            };
+        case actionTypeName.DECREMENT:
+            return {
+                ...state,
+                cart:action.cart
+            };
+        case actionTypeName.REMOVE_ITEM:
+            return {
+                ...state,
+                products:action.products,
+                cart:action.cart
+            };
     }
     return state;
 };

@@ -2,6 +2,7 @@ import * as actionTypeName from './action-type-names';
 import {storeProducts, detailProduct} from '../data';
 import {store} from '../index';//we need "store" to use "getState" outside of "return (dispatch, getState)=>{}"
 
+//////////////////////////////////////////////////////////
 export const asyn_setProducts=()=>{
     return (dispatch)=>{
         let tempProducts=[];
@@ -19,7 +20,7 @@ const setProducts=(products)=>{
         products:products
     }
 };
-////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
 
 const getItem=(id)=>{
     const product= store.getState().products.find((product) => {
@@ -34,7 +35,7 @@ export const handelDetail=(id)=>{
         detailProduct:getItem(id)
     };
 };
-//////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
 export const asyn_addToCart=(id)=>{
     return (dispatch)=>{
         let tempProducts=[...store.getState().products];
@@ -76,22 +77,74 @@ export const addTotal=()=>{
     };
 };
 
+export const asyn_increment=(id)=>{
+    return (dispatch)=>{
+        let tempCart=[...store.getState().cart];
+        let index=tempCart.findIndex(item=>item.id===id);
+        let product=tempCart[index];
+
+        product.count++;
+        product.total+=product.price;
+
+        dispatch(increment(tempCart));
+        dispatch(addTotal());
+    }
+};
+const increment=(tempCart)=>{
+    return {
+        type:actionTypeName.INCREMENT,
+        cart:tempCart
+    }
+};
+export const asyn_decrement=(id)=>{
+    return (dispatch)=>{
+        let tempCart=[...store.getState().cart];
+        let index=tempCart.findIndex(item=>item.id===id);
+        let product=tempCart[index];
+
+        product.count--;
+        product.total-=product.price;
+
+        if(product.count<=0){
+            asyn_removeItem(id);
+        } else {
+            dispatch(decrement(tempCart));
+            dispatch(addTotal());
+        }
+    };
+};
+const decrement=(tempCart)=>{
+    return {
+        type:actionTypeName.DECREMENT,
+        cart:tempCart
+    }
+};
 ///////////////////////////////////////////////////////////
-export const openModal=(id)=>{
-    const product=getItem(id);
+export const asyn_removeItem=(id)=>{
+    return (dispatch)=>{
+        let tempProducts=[...store.getState().products];
+        let index=tempProducts.findIndex(item=>item.id===id);
+        let product=tempProducts[index];
+
+        product.inCart=false;
+        product.count=0;
+        product.total=0;
+
+        let tempCart=store.getState().cart.filter(item=>item.id!==id);
+
+        dispatch(removeItem(tempProducts, tempCart));
+        dispatch(addTotal());
+    }
+};
+const removeItem=(tempProducts, tempCart)=>{
     return {
-        type:actionTypeName.OPEN_MODAL,
-        modalProduct:product,
-        modalOpen:true
+        type:actionTypeName.REMOVE_ITEM,
+        products:tempProducts,
+        cart:tempCart
     };
 };
-export const closeModal=()=>{
-    return {
-        type:actionTypeName.CLOSE_MODAL,
-        modalOpen:false
-    };
-};
-//////////////////////////////////////////////////////////
+
+
 export const clearCart=()=>{
     let tempProducts=[...store.getState().products];
     tempProducts.map(item=>{
@@ -109,3 +162,20 @@ export const clearCart=()=>{
         cart:[]
     }
 };
+///////////////////////////////////////////////////////////
+export const openModal=(id)=>{
+    const product=getItem(id);
+    return {
+        type:actionTypeName.OPEN_MODAL,
+        modalProduct:product,
+        modalOpen:true
+    };
+};
+export const closeModal=()=>{
+    return {
+        type:actionTypeName.CLOSE_MODAL,
+        modalOpen:false
+    };
+};
+//////////////////////////////////////////////////////////
+

@@ -1,6 +1,7 @@
 import React,{useContext} from 'react';
 import {ProductContext} from '../../context';
 import {connect} from 'react-redux';
+import * as actions from '../../store/actions';
 
 const CartItem = (props) => {
     const context=useContext(ProductContext);
@@ -27,15 +28,15 @@ const CartItem = (props) => {
             {/*Quantity button Col*/}
             <div className="col-10 col-lg-2 mx-auto my-2 my-lg-0">
                 <div className="d-flex justify-content-center">
-                    <span className="btn btn-black mx-1" onClick={()=>context.decrement(id)}>-</span>
+                    <span className="btn btn-black mx-1" onClick={()=>this.props.onDecrement(id)}>-</span>
                     <span className="btn btn-black mx-1">{count}</span>
-                    <span className="btn btn-black mx-1" onClick={()=>context.increment(id)}>+</span>
+                    <span className="btn btn-black mx-1" onClick={()=>this.props.onIncrement(id)}>+</span>
                 </div>
             </div>
 
             {/*Remove button Col*/}
             <div className="col-10 col-lg-2 mx-auto">
-                <div className="cart-icon" onClick={()=>context.removeItem(id)}>
+                <div className="cart-icon" onClick={()=>this.props.onRemoveItem(id)}>
                     <i className="fas fa-trash"></i>
                 </div>
             </div>
@@ -48,15 +49,13 @@ const CartItem = (props) => {
     );
 };
 
-const mapStateToProps=(state)=>{
-    return {
 
-    }
-};
 const mapDispatchToProps=(dispatch)=>{
     return {
-
+        onIncrement:(id)=>dispatch(actions.asyn_increment(id)),
+        onDecrement:(id)=>dispatch(actions.asyn_decrement(id)),
+        onRemoveItem:(id)=>dispatch(actions.asyn_removeItem(id))
     }
 };
 
-export default CartItem;
+export default connect(null, mapDispatchToProps)(CartItem);
