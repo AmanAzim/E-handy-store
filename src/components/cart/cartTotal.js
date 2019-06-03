@@ -1,14 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import PayPalButton from './PayPalButton';
-import {ProductContext} from '../../context';
 import {connect} from 'react-redux';
 import * as actions from "../../store/actions";
 
 const CartTotal = (props) => {
-
-    const context=useContext(ProductContext);
-
-    const {cartSubtotal, cartTax, cartTotal}=context;
 
     return (
         <React.Fragment>

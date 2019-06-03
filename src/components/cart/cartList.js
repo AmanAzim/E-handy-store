@@ -1,11 +1,8 @@
-import React,{useContext} from 'react';
-import {ProductContext} from '../../context';
+import React from 'react';
 import CartItem from './cartItem';
 import {connect} from 'react-redux';
 
 const CartList = (props) => {
-
-    const context=useContext(ProductContext);
 
     return (
         <div className="container-fluid">
