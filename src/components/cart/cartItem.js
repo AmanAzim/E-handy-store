@@ -6,7 +6,7 @@ import * as actions from '../../store/actions';
 const CartItem = (props) => {
     const context=useContext(ProductContext);
 
-    const {id, title, img, price, total, count}=props.item;
+    const {id, title, img, price, total, count}=props.cart[props.index];
 
     return (
         <div className="row my-2 text-center text-capitalize">
@@ -28,15 +28,15 @@ const CartItem = (props) => {
             {/*Quantity button Col*/}
             <div className="col-10 col-lg-2 mx-auto my-2 my-lg-0">
                 <div className="d-flex justify-content-center">
-                    <span className="btn btn-black mx-1" onClick={()=>this.props.onDecrement(id)}>-</span>
+                    <span className="btn btn-black mx-1" onClick={()=>props.onDecrement(id)}>-</span>
                     <span className="btn btn-black mx-1">{count}</span>
-                    <span className="btn btn-black mx-1" onClick={()=>this.props.onIncrement(id)}>+</span>
+                    <span className="btn btn-black mx-1" onClick={()=>props.onIncrement(id)}>+</span>
                 </div>
             </div>
 
             {/*Remove button Col*/}
             <div className="col-10 col-lg-2 mx-auto">
-                <div className="cart-icon" onClick={()=>this.props.onRemoveItem(id)}>
+                <div className="cart-icon" onClick={()=>props.onRemoveItem(id)}>
                     <i className="fas fa-trash"></i>
                 </div>
             </div>
@@ -49,6 +49,11 @@ const CartItem = (props) => {
     );
 };
 
+const mapStateToProps=(state)=>{
+  return {
+      cart:state.cart
+  }
+};
 
 const mapDispatchToProps=(dispatch)=>{
     return {
@@ -58,4 +63,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
 };
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

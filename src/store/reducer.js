@@ -60,7 +60,7 @@ const reducer=(state=initialState, action)=>{
         case actionTypeName.INCREMENT:
             return {
                 ...state,
-                cart:action.cart
+                cart:action.cart,
             };
         case actionTypeName.DECREMENT:
             return {

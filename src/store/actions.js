@@ -78,14 +78,15 @@ export const addTotal=()=>{
 };
 
 export const asyn_increment=(id)=>{
+
+    let tempCart=[...store.getState().cart];
+    let index=tempCart.findIndex(item=>item.id===id);
+    let product=tempCart[index];
+
+    product.count++;
+    product.total+=product.price;
+    console.log( 'Product count',product.count)
     return (dispatch)=>{
-        let tempCart=[...store.getState().cart];
-        let index=tempCart.findIndex(item=>item.id===id);
-        let product=tempCart[index];
-
-        product.count++;
-        product.total+=product.price;
-
         dispatch(increment(tempCart));
         dispatch(addTotal());
     }
@@ -106,7 +107,20 @@ export const asyn_decrement=(id)=>{
         product.total-=product.price;
 
         if(product.count<=0){
-            asyn_removeItem(id);
+
+             let tempProducts=[...store.getState().products];
+             let index=tempProducts.findIndex(item=>item.id===id);
+             let product=tempProducts[index];
+
+             product.inCart=false;
+             product.count=0;
+             product.total=0;
+
+             let tempCart=store.getState().cart.filter(item=>item.id!==id);
+
+             dispatch(removeItem(tempProducts, tempCart));
+             dispatch(addTotal());
+
         } else {
             dispatch(decrement(tempCart));
             dispatch(addTotal());
