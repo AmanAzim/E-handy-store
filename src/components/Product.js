@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Product.css';
 import styled from 'styled-components';
-import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -13,11 +12,10 @@ const ProductWrapper=styled.div`
 
 class Product extends Component {
 
-    static contextType=ProductContext;
 
     render() {
 
-        const {id, title, img, price, inCart}=this.props.product;
+        const {id, title, img, price, inCart}=this.props.products[this.props.index];
 
         return (
             <div className="col-9 mx-auto col-md-6 col-lg-3 my-3">
@@ -55,7 +53,7 @@ Product.propTypes={
 
 const mapStateToProps=(state)=>{
     return {
-
+        products:state.products
     }
 };
 const mapDispatchToProps=(dispatch)=>{

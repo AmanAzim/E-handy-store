@@ -2,6 +2,7 @@ import * as actionTypeName from './action-type-names';
 import {storeProducts, detailProduct} from '../data';
 import {store} from '../index';//we need "store" to use "getState" outside of "return (dispatch, getState)=>{}"
 
+
 //////////////////////////////////////////////////////////
 export const asyn_setProducts=()=>{
     return (dispatch)=>{
@@ -10,7 +11,7 @@ export const asyn_setProducts=()=>{
             const singleItem={...item};
             tempProducts=[...tempProducts, singleItem];
         });
-
+        console.log('set_product');
         dispatch(setProducts(tempProducts));
     }
 };
@@ -26,7 +27,7 @@ const getItem=(id)=>{
     const product= store.getState().products.find((product) => {
         return product.id === id;
     });
-    console.log('product', product);
+
     return product;
 };
 export const handelDetail=(id)=>{
@@ -44,8 +45,8 @@ export const asyn_addToCart=(id)=>{
 
         product.inCart=true;
         product.count=1;
-        const tempPrice=product.price;
-        product.total=tempPrice;
+        product.total=product.price;
+        console.log('tempProducts',tempProducts);
         dispatch(addToCart(tempProducts, product));
         dispatch(addTotal());
     };
@@ -63,7 +64,7 @@ export const addTotal=()=>{
     for(let i=0;i<store.getState().cart.length;i++){
         subTotal +=store.getState().cart[i].total;
     }
-    //console.log('subTotal:'+subTotal);
+
     let tempTax=subTotal*0.1;
     tempTax=parseFloat(tempTax.toFixed(2));
 
@@ -85,7 +86,7 @@ export const asyn_increment=(id)=>{
 
     product.count++;
     product.total+=product.price;
-    console.log( 'Product count',product.count)
+
     return (dispatch)=>{
         dispatch(increment(tempCart));
         dispatch(addTotal());

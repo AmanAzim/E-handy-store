@@ -6,9 +6,6 @@ import * as actions from '../store/actions';
 
 class ProductList extends Component {
 
-    componentDidMount() {
-        this.props.onSetProducts();
-    }
 
     render() {
         //console.log(this.props.products);
@@ -20,8 +17,8 @@ class ProductList extends Component {
                         <Title name="Our" title="Products"/>
 
                         <div className="row">
-                            {this.props.products.map((product)=>{
-                                    return <Product key={product.id} product={product}></Product>
+                            {this.props.products.map((product, index)=>{
+                                    return <Product key={product.id} index={index}></Product>
                             })}
                         </div>
 
@@ -37,11 +34,6 @@ const mapStateToProps=(state)=>{
         products:state.products
     }
 };
-const mapDispatchToProps=(dispatch)=>{
-    return {
-        onSetProducts:()=>dispatch(actions.asyn_setProducts())
-    }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList);
+export default connect(mapStateToProps)(ProductList);
 

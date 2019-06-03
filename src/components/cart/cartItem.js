@@ -1,10 +1,8 @@
-import React,{useContext} from 'react';
-import {ProductContext} from '../../context';
+import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions';
 
 const CartItem = (props) => {
-    const context=useContext(ProductContext);
 
     const {id, title, img, price, total, count}=props.cart[props.index];
 
