@@ -6,7 +6,10 @@ import CartList from './cartList';
 import CartTotal from './cartTotal';
 import {connect} from 'react-redux';
 
+
+
 class Cart extends Component {
+
 
     render() {
         let content='';
@@ -36,6 +39,5 @@ const mapStateToProps=(state)=>{
         cart:state.cart,
     }
 };
-
 
 export default connect(mapStateToProps)(Cart);

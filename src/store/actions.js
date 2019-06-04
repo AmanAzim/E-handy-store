@@ -1,18 +1,30 @@
 import * as actionTypeName from './action-type-names';
 import {storeProducts, detailProduct} from '../data';
 import {store} from '../index';//we need "store" to use "getState" outside of "return (dispatch, getState)=>{}"
-
+import axios from 'axios';
 
 //////////////////////////////////////////////////////////
 export const asyn_setProducts=()=>{
     return (dispatch)=>{
+        let serverProducts=[];
+
+        axios.get('https://e-handy-store.firebaseio.com/storeProducts.json')
+            .then(res=>{
+                serverProducts=res.data;
+                console.log('serveradata',serverProducts);
+                dispatch(setProducts(serverProducts));
+            }).catch(err=>console.log(err));
+
+        /*
         let tempProducts=[];
         storeProducts.forEach((item)=>{
             const singleItem={...item};
             tempProducts=[...tempProducts, singleItem];
         });
+        console.log('localData',tempProducts);
         console.log('set_product');
-        dispatch(setProducts(tempProducts));
+
+        */
     }
 };
 const setProducts=(products)=>{

@@ -3,10 +3,10 @@ import * as actionTypeName from './action-type-names';
 
 const initialState={
     products:[], //because the array is too big we kept in separate file and imported it.
-    detailProduct:{...detailProduct},
+    detailProduct:{},
     cart:[],
     modalOpen:false,
-    modalProduct:{...detailProduct},
+    modalProduct:{},
     cartSubtotal:0,
     cartTax:0,
     cartTotal:0,
