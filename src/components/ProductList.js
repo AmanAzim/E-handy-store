@@ -2,13 +2,12 @@ import React, {Component} from 'react';
 import Product from './Product'
 import Title from './title';
 import {connect} from 'react-redux';
-import * as actions from '../store/actions';
+
 
 class ProductList extends Component {
 
 
     render() {
-        //console.log(this.props.products);
         return (
             <React.Fragment>
                 <div className="py-5">
@@ -18,7 +17,7 @@ class ProductList extends Component {
 
                         <div className="row">
                             {this.props.products.map((product, index)=>{
-                                    return <Product key={product.id} index={index}></Product>
+                                    return <Product key={product.id} index={index} product={product}></Product>
                             })}
                         </div>
 

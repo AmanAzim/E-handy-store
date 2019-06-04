@@ -7,7 +7,7 @@ const CartList = (props) => {
     return (
         <div className="container-fluid">
             {   props.cart.map((item,index)=>{
-                    return <CartItem key={item.id} index={index}/>
+                    return <CartItem key={item.id} index={index} item={item}/>
                 })
             }
         </div>

@@ -59,8 +59,10 @@ export const asyn_addToCart=(id)=>{
         product.count=1;
         product.total=product.price;
         console.log('tempProducts',tempProducts);
-        dispatch(addToCart(tempProducts, product));
-        dispatch(addTotal());
+
+        return new Promise((resolve)=>{
+           resolve(dispatch(addToCart(tempProducts, product)))
+        }).then(()=>dispatch(addTotal()));
     };
 };
 const  addToCart=(tempProducts, product)=>{
@@ -100,8 +102,12 @@ export const asyn_increment=(id)=>{
     product.total+=product.price;
 
     return (dispatch)=>{
-        dispatch(increment(tempCart));
-        dispatch(addTotal());
+
+        return new Promise((resolve)=>{
+            resolve(dispatch(increment(tempCart)))
+        }).then(()=>dispatch(addTotal()));
+       // dispatch(increment(tempCart));
+        //dispatch(addTotal());
     }
 };
 const increment=(tempCart)=>{
@@ -120,8 +126,7 @@ export const asyn_decrement=(id)=>{
         product.total-=product.price;
 
         if(product.count<=0){
-
-             let tempProducts=[...store.getState().products];
+            /* let tempProducts=[...store.getState().products];
              let index=tempProducts.findIndex(item=>item.id===id);
              let product=tempProducts[index];
 
@@ -132,11 +137,14 @@ export const asyn_decrement=(id)=>{
              let tempCart=store.getState().cart.filter(item=>item.id!==id);
 
              dispatch(removeItem(tempProducts, tempCart));
-             dispatch(addTotal());
-
+             dispatch(addTotal()); */
+             dispatch(asyn_removeItem(id))
         } else {
-            dispatch(decrement(tempCart));
-            dispatch(addTotal());
+            return new Promise((resolve)=>{
+                resolve(dispatch(decrement(tempCart)))
+            }).then(()=>dispatch(addTotal()));
+            //dispatch(decrement(tempCart));
+            //dispatch(addTotal());
         }
     };
 };
@@ -159,8 +167,11 @@ export const asyn_removeItem=(id)=>{
 
         let tempCart=store.getState().cart.filter(item=>item.id!==id);
 
-        dispatch(removeItem(tempProducts, tempCart));
-        dispatch(addTotal());
+        //dispatch(removeItem(tempProducts, tempCart));
+        //dispatch(addTotal());
+        return new Promise(resolve => {
+            resolve(dispatch(removeItem(tempProducts, tempCart)));
+        }).then(()=>dispatch(addTotal()))
     }
 };
 const removeItem=(tempProducts, tempCart)=>{
