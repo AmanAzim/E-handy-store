@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import './Product.css';
-import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions';
 
-const ProductWrapper=styled.div`
-    
-`;
+
 
 class Product extends Component {
 

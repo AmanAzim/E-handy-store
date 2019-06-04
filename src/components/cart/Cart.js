@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {ProductContext} from '../../context';
 import Title from '../title';
 import CartColumns from './CartColumns';
 import EmptyCart from './emptyCart';
@@ -8,7 +7,6 @@ import CartTotal from './cartTotal';
 import {connect} from 'react-redux';
 
 class Cart extends Component {
-    static contextType=ProductContext;
 
     render() {
         let content='';

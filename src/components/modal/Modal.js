@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 import './Modal.css';
-import {ProductContext} from '../../context';
 import {ButtonContainerDark} from '../Button';
-import Styled from 'styled-components';
 import {connect} from 'react-redux';
 import * as actions from "../../store/actions";
 
 class Modal extends Component {
 
-    static contextType=ProductContext;
 
     render() {
         //https://medium.freecodecamp.org/hitchhikers-guide-to-react-router-v4-4b12e369d10

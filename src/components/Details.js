@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
-import {ProductContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import {ButtonContainerDark} from './Button';
 import {connect} from 'react-redux';
 import * as actions from "../store/actions";
 
 class Details extends Component {
-
-    static contextType=ProductContext;
 
     render() {
         const {id, title, company, info, img, price, inCart}=this.props.detailProduct;
