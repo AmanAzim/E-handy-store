@@ -14,7 +14,6 @@ export const asyn_setProducts=()=>{
                 console.log('serveradata',serverProducts);
                 dispatch(setProducts(serverProducts));
             }).catch(err=>console.log(err));
-
         /*
         let tempProducts=[];
         storeProducts.forEach((item)=>{
@@ -59,10 +58,13 @@ export const asyn_addToCart=(id)=>{
         product.count=1;
         product.total=product.price;
         console.log('tempProducts',tempProducts);
-
+        //1st way of making Promise
         return new Promise((resolve)=>{
-           resolve(dispatch(addToCart(tempProducts, product)))
-        }).then(()=>dispatch(addTotal()));
+            if(dispatch(addToCart(tempProducts, product))){
+                resolve(dispatch(addTotal()))
+            }
+        })
+
     };
 };
 const  addToCart=(tempProducts, product)=>{
@@ -102,10 +104,11 @@ export const asyn_increment=(id)=>{
     product.total+=product.price;
 
     return (dispatch)=>{
-
-        return new Promise((resolve)=>{
+        //2nd way of creating Promise
+        let p1= new Promise((resolve)=>{
             resolve(dispatch(increment(tempCart)))
-        }).then(()=>dispatch(addTotal()));
+        });
+        p1.then(()=>dispatch(addTotal()));
        // dispatch(increment(tempCart));
         //dispatch(addTotal());
     }
@@ -138,8 +141,9 @@ export const asyn_decrement=(id)=>{
 
              dispatch(removeItem(tempProducts, tempCart));
              dispatch(addTotal()); */
-             dispatch(asyn_removeItem(id))
+            dispatch(asyn_removeItem(id))
         } else {
+            //3rd way of creating Promise
             return new Promise((resolve)=>{
                 resolve(dispatch(decrement(tempCart)))
             }).then(()=>dispatch(addTotal()));
