@@ -10,6 +10,7 @@ import Details from './components/Details';
 import Cart from './components/cart/Cart';
 import PageNotFound from './components/PageNotFound';
 import Modal from './components/modal/Modal';
+import Footer from './components/Footer';
 import * as actions from "./store/actions";
 
 
@@ -34,6 +35,8 @@ function App(props) {
           </Switch>
 
           <Modal/>
+
+          <Footer/>
       </React.Fragment>
   );
 }
