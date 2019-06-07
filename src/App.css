@@ -13,10 +13,19 @@ body{
   background: var(--mainWhite) !important;
   color: var(--mainDark) !important;
 }
+
 .footer {
   background-color: var(--mainRed);
   height: 3rem;
-  width: auto;
+  width: 100%;
+  text-align: center;
+  display: table;
+}
+.footer p {
+  font-size: 1rem ;
+  text-align:center;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .text-title {
