@@ -4,9 +4,9 @@ class PageNotFound extends Component {
     render() {
         console.log(this.props)
         return (
-           <div className="container">
+           <div className="container mt-5">
                <div className="row">
-                   <div className="col-10 mx-auto pt-5 text-center text-title">
+                   <div className="col-10 mx-auto pt-5 mt-5 text-center text-title">
                        <h1 className="display-3">404</h1>
                        <h1>ERROR</h1>
                        <h2>THE URL:<span className="text-danger">{this.props.location.pathname}</span> WAS NOT FOUND !</h2>

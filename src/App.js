@@ -26,13 +26,15 @@ function App(props) {
       <React.Fragment>
          <Navbar/> {/*It is not included inside the <Switch> because we want to show the navbar in every rendered page*/}
 
-          <Switch>
-              <Route path="/" exact component={ProductList}/>
-              <Route path="/details" component={Details}/>
-              <Route path="/cart" component={Cart}/>
+          <div className="conditional-content">
+              <Switch>
+                  <Route path="/" exact component={ProductList}/>
+                  <Route path="/details" component={Details}/>
+                  <Route path="/cart" component={Cart}/>
 
-              <Route component={PageNotFound}/> {/*To catch all the unknown route*/}
-          </Switch>
+                  <Route component={PageNotFound}/> {/*To catch all the unknown route*/}
+              </Switch>
+          </div>
 
           <Modal/>
 
