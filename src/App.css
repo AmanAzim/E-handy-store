@@ -59,8 +59,3 @@ body{
   font-size: 1.2rem;
   color: var(--mainYellow);
 }
-
-.page-fill {
-  margin-top: 100%;
-  margin-bottom: 100%;
-}
