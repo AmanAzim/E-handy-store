@@ -23,7 +23,11 @@ class Cart extends Component {
                 </React.Fragment>
             );
         }else {
-            content=<EmptyCart/>;
+            content=(
+                <div className="page-fill">
+                    <EmptyCart/>
+                </div>
+            );
         }
 
         return (
