@@ -9,7 +9,7 @@ const NavWrapper=styled.nav`
     background:var(--mainRed);
     .nav-link{
         color:var(--mainWhite) !important;
-        font-size:1.3rem;
+        font-size:1.4rem;
     }   
 `;
 
