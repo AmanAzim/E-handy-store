@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 import './Modal.css';
+import CSSTransition from 'react-transition-group/CSSTransition';
+import BackDrop from './backDrop';
 import {ButtonContainerDark} from '../Button';
 import {connect} from 'react-redux';
 import * as actions from "../../store/actions";
@@ -15,10 +17,7 @@ class Modal extends Component {
         //console.log(this.props.history);
         const {img, title, price}=this.props.modalProduct;
 
-        let modal=null;
-
-        if(this.props.modalOpen){
-            modal=(
+        let modal=(
                 <div className="ModalContainer">
                     <div className="container">
                         <div className="row">
@@ -38,9 +37,20 @@ class Modal extends Component {
                     </div>
                 </div>
             );
-        }
 
-        return (modal);
+        const animationTiming={
+            enter:400,
+            exit:1000
+        };
+
+        return (
+            <React.Fragment>
+                <CSSTransition in={this.props.modalOpen} timeout={animationTiming} mountOnEnter unmountOnExit style={{zIndex:100}} classNames={{enter:'', enterActive:'ModalOpen', exit:'', exitActive:'ModalClose'}}>
+                    {modal}
+                </CSSTransition>
+                <BackDrop show={this.props.modalOpen} style={{zIndex:-1}}/>
+            </React.Fragment>
+        );
     }
 }
 
