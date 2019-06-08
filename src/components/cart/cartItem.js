@@ -21,7 +21,7 @@ const CartItem = (props) => {
 
             {/*Price Col*/}
             <div className="col-10 col-lg-2 mx-auto">
-                <span className="d-lg-none">Price: </span ><b>${price}</b>
+                <span className="d-lg-none">Price: </span ><b>€{price}</b>
             </div>
 
             {/*Quantity button Col*/}
@@ -42,7 +42,7 @@ const CartItem = (props) => {
 
             {/*Total Col*/}
             <div className="col-10 col-lg-2 mx-auto">
-                <b>Item total : ${total}</b>
+                <b>Item total : €{total}</b>
             </div>
         </div>
     );

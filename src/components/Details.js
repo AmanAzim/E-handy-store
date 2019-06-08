@@ -25,7 +25,7 @@ class Details extends Component {
 
                     <div className="col-10 mx-auto my-3 col-md-6 text-capitalize">
                         <h4 className="text-title mt-3 mb-2">Made by: {company}</h4>
-                        <h4 className="text-muted">Price: ${price}</h4>
+                        <h4 className="text-muted">Price: €{price}</h4>
                         <p className="mt-3 mb-0"><u><b>Product Info:</b></u></p>
                         <p className="text-muted">{info}</p>
                         {/*Buttons*/}
