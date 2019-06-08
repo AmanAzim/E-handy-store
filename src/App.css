@@ -17,9 +17,9 @@ body{
 .conditional-content {
   min-height: 34rem;
 }
-@media only screen and (min-width: 1800px) {
+@media only screen and (min-width: 1600px) {
     .conditional-content {
-        min-height: 50rem;
+        min-height: 45rem;
     }
 }
 
