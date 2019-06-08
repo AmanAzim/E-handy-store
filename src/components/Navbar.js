@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
-import logo from '../logo2.svg'
+import logo from '../logo2.svg';
 import {ButtonContainer} from "./Button";
 import styled from 'styled-components';
 import '../App.css';
