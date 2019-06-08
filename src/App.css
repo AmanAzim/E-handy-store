@@ -18,6 +18,11 @@ body{
   min-height: 34rem;
 }
 
+.myLogo {
+  height: 3.9rem;
+  width: 5rem;
+}
+
 .footer {
   background-color: var(--mainRed);
   height: 3rem;
