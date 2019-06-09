@@ -19,7 +19,6 @@ function App(props) {
 
     useEffect(()=>{
         props.onSetProducts();
-
     }, []);
 
   return (

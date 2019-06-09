@@ -13,6 +13,8 @@ export const asyn_setProducts=()=>{
                 serverProducts=res.data;
                 console.log('serveradata',serverProducts);
                 dispatch(setProducts(serverProducts));
+            }).then(()=>{
+                dispatch(loadDetailOnReload())
             }).catch(err=>console.log(err));
         /*
         let tempProducts=[];
@@ -22,7 +24,6 @@ export const asyn_setProducts=()=>{
         });
         console.log('localData',tempProducts);
         console.log('set_product');
-
         */
     }
 };
@@ -33,19 +34,23 @@ const setProducts=(products)=>{
     }
 };
 //////////////////////////////////////////////////////////
-
-const getItem=(id)=>{
-    const product= store.getState().products.find((product) => {
-        return product.id === id;
-    });
-
-    return product;
-};
 export const handelDetail=(id)=>{
+    const product= store.getState().products.find(product=>product.id===id);
+
+    let index=store.getState().products.findIndex(product=>product.id===id);
+    localStorage.setItem('detailProductIndex', index);
+
     return {
         type:actionTypeName.HANDEL_DETAIL,
-        detailProduct:getItem(id)
+        detailProduct:product
     };
+};
+export const loadDetailOnReload=()=>{
+    const index=localStorage.getItem('detailProductIndex');
+    const loadedProductId=store.getState().products[index].id;
+   return (dispatch)=>{
+       dispatch(handelDetail(loadedProductId))
+   };
 };
 /////////////////////////////////////////////////////////
 export const asyn_addToCart=(id)=>{
@@ -64,7 +69,6 @@ export const asyn_addToCart=(id)=>{
                 resolve(dispatch(addTotal()))
             }
         })
-
     };
 };
 const  addToCart=(tempProducts, product)=>{
@@ -95,7 +99,6 @@ export const addTotal=()=>{
 };
 
 export const asyn_increment=(id)=>{
-
     let tempCart=[...store.getState().cart];
     let index=tempCart.findIndex(item=>item.id===id);
     let product=tempCart[index];
@@ -206,7 +209,7 @@ export const clearCart=()=>{
 };
 ///////////////////////////////////////////////////////////
 export const openModal=(id)=>{
-    const product=getItem(id);
+    const product= store.getState().products.find(product=>product.id===id);
     return {
         type:actionTypeName.OPEN_MODAL,
         modalProduct:product,
