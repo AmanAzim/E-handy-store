@@ -19,6 +19,10 @@ function App(props) {
 
     useEffect(()=>{
         props.onSetProducts();
+
+        return ()=>{
+            props.onCleanLocalStorage();
+        }
     }, []);
 
   return (
@@ -44,7 +48,8 @@ function App(props) {
 
 const mapDispatchToProps=(dispatch)=>{
     return {
-        onSetProducts:()=>dispatch(actions.asyn_setProducts())
+        onSetProducts:()=>dispatch(actions.asyn_setProducts()),
+        onCleanLocalStorage:()=>dispatch(actions.removeCartFromBrowser())
     }
 };
 

@@ -54,24 +54,21 @@ const loadDetailOnReload=()=>{
    };
 };
 const loadCartOnReload=()=>{
-    let cart=[];
-    const tempCart=JSON.parse(localStorage.getItem('cart'));
-    //tempCart.forEach(item=>{
-        //const singleItem={...item};
-        //cart=[...cart, singleItem];
-   // });//
-    console.log('loadedCart', tempCart)
+    let stringToArr=localStorage.getItem('cart');
+    const tempCart=JSON.parse(stringToArr);
+
     const cartSubtotal=localStorage.getItem('cartSubtotal');
     const cartTax=localStorage.getItem('cartTax');
     const cartTotal=localStorage.getItem('cartTotal');
+
     return (dispatch)=>{
-        dispatch(reloadedCart(cart, cartSubtotal, cartTax, cartTotal))
+        dispatch(reloadedCart(tempCart, cartSubtotal, cartTax, cartTotal))
     }
 };
-const reloadedCart=(cart, cartSubtotal, cartTax, cartTotal)=>{
+const reloadedCart=(tempCart, cartSubtotal, cartTax, cartTotal)=>{
     return {
         type:actionTypeName.RELOAD_CART,
-        cart:cart,
+        cart:tempCart,
         cartSubtotal:cartSubtotal,
         cartTax:cartTax,
         cartTotal:cartTotal
@@ -87,7 +84,7 @@ export const asyn_addToCart=(id)=>{
         product.inCart=true;
         product.count=1;
         product.total=product.price;
-        console.log('tempProducts',tempProducts);
+
         //1st way of making Promise
         return new Promise((resolve)=>{
             if(dispatch(addToCart(tempProducts, product))){
@@ -235,12 +232,13 @@ export const clearCart=()=>{
     }
 };
 const saveCartOnBrowser=()=>{
-    localStorage.setItem('cart', JSON.stringify(store.getState().cart));
+    const StringCart=JSON.stringify(store.getState().cart)
+    localStorage.setItem('cart', StringCart);
     localStorage.setItem('cartSubtotal', store.getState().cartSubtotal);
     localStorage.setItem('cartTax', store.getState().cartTax);
     localStorage.setItem('cartTotal', store.getState().cartTotal);
 };
-const removeCartFromBrowser=()=>{
+export const removeCartFromBrowser=()=>{
     localStorage.removeItem('cart');
     localStorage.removeItem('cartSubtotal');
     localStorage.removeItem('cartTax');
