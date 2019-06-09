@@ -9,3 +9,4 @@ export const INCREMENT='INCREMENT';
 export const DECREMENT='DECREMENT';
 export const REMOVE_ITEM='REMOVE_ITEM';
 export const ON_RELOAD='ON_RELOAD';
+export const RELOAD_CART='RELOAD_CART';

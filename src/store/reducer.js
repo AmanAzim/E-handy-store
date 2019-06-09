@@ -73,6 +73,14 @@ const reducer=(state=initialState, action)=>{
                 products:action.products,
                 cart:action.cart
             };
+        case actionTypeName.RELOAD_CART:
+            return {
+                ...state,
+                cart:action.cart,
+                cartSubtotal:action.cartSubtotal,
+                cartTax:action.cartTax,
+                cartTotal:action.cartTotal
+            }
     }
     return state;
 };

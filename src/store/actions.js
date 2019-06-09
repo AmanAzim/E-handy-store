@@ -14,7 +14,8 @@ export const asyn_setProducts=()=>{
                 console.log('serveradata',serverProducts);
                 dispatch(setProducts(serverProducts));
             }).then(()=>{
-                dispatch(loadDetailOnReload())
+                dispatch(loadDetailOnReload());
+                dispatch(loadCartOnReload());
             }).catch(err=>console.log(err));
         /*
         let tempProducts=[];
@@ -45,12 +46,36 @@ export const handelDetail=(id)=>{
         detailProduct:product
     };
 };
-export const loadDetailOnReload=()=>{
+const loadDetailOnReload=()=>{
     const index=localStorage.getItem('detailProductIndex');
     const loadedProductId=store.getState().products[index].id;
    return (dispatch)=>{
        dispatch(handelDetail(loadedProductId))
    };
+};
+const loadCartOnReload=()=>{
+    let cart=[];
+    const tempCart=JSON.parse(localStorage.getItem('cart'));
+    //tempCart.forEach(item=>{
+        //const singleItem={...item};
+        //cart=[...cart, singleItem];
+   // });//
+    console.log('loadedCart', tempCart)
+    const cartSubtotal=localStorage.getItem('cartSubtotal');
+    const cartTax=localStorage.getItem('cartTax');
+    const cartTotal=localStorage.getItem('cartTotal');
+    return (dispatch)=>{
+        dispatch(reloadedCart(cart, cartSubtotal, cartTax, cartTotal))
+    }
+};
+const reloadedCart=(cart, cartSubtotal, cartTax, cartTotal)=>{
+    return {
+        type:actionTypeName.RELOAD_CART,
+        cart:cart,
+        cartSubtotal:cartSubtotal,
+        cartTax:cartTax,
+        cartTotal:cartTotal
+    }
 };
 /////////////////////////////////////////////////////////
 export const asyn_addToCart=(id)=>{
@@ -68,6 +93,8 @@ export const asyn_addToCart=(id)=>{
             if(dispatch(addToCart(tempProducts, product))){
                 resolve(dispatch(addTotal()))
             }
+        }).then(()=>{
+            saveCartOnBrowser();
         })
     };
 };
@@ -111,7 +138,7 @@ export const asyn_increment=(id)=>{
         let p1= new Promise((resolve)=>{
             resolve(dispatch(increment(tempCart)))
         });
-        p1.then(()=>dispatch(addTotal()));
+        p1.then(()=>dispatch(addTotal())).then(()=>{saveCartOnBrowser();});
        // dispatch(increment(tempCart));
         //dispatch(addTotal());
     }
@@ -149,7 +176,7 @@ export const asyn_decrement=(id)=>{
             //3rd way of creating Promise
             return new Promise((resolve)=>{
                 resolve(dispatch(decrement(tempCart)))
-            }).then(()=>dispatch(addTotal()));
+            }).then(()=>dispatch(addTotal())).then(()=>{saveCartOnBrowser();});
             //dispatch(decrement(tempCart));
             //dispatch(addTotal());
         }
@@ -178,7 +205,7 @@ export const asyn_removeItem=(id)=>{
         //dispatch(addTotal());
         return new Promise(resolve => {
             resolve(dispatch(removeItem(tempProducts, tempCart)));
-        }).then(()=>dispatch(addTotal()))
+        }).then(()=>dispatch(addTotal())).then(()=>saveCartOnBrowser());
     }
 };
 const removeItem=(tempProducts, tempCart)=>{
@@ -197,7 +224,7 @@ export const clearCart=()=>{
         item.count=0;
         item.total=0;
     });
-
+    removeCartFromBrowser();
     return {
         type:actionTypeName.CLEAR_CART,
         products:tempProducts,
@@ -207,6 +234,19 @@ export const clearCart=()=>{
         cart:[]
     }
 };
+const saveCartOnBrowser=()=>{
+    localStorage.setItem('cart', JSON.stringify(store.getState().cart));
+    localStorage.setItem('cartSubtotal', store.getState().cartSubtotal);
+    localStorage.setItem('cartTax', store.getState().cartTax);
+    localStorage.setItem('cartTotal', store.getState().cartTotal);
+};
+const removeCartFromBrowser=()=>{
+    localStorage.removeItem('cart');
+    localStorage.removeItem('cartSubtotal');
+    localStorage.removeItem('cartTax');
+    localStorage.removeItem('cartTotal');
+    localStorage.removeItem('detailProductIndex');
+}
 ///////////////////////////////////////////////////////////
 export const openModal=(id)=>{
     const product= store.getState().products.find(product=>product.id===id);
