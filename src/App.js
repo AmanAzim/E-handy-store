@@ -25,6 +25,7 @@ function App(props) {
         }
     }, []);
 
+
   return (
       <React.Fragment>
          <Navbar/> {/*It is not included inside the <Switch> because we want to show the navbar in every rendered page*/}

@@ -57,17 +57,34 @@ const loadCartOnReload=()=>{
     let stringToArr=localStorage.getItem('cart');
     const tempCart=JSON.parse(stringToArr);
 
+    let tempProducts=[];
+    store.getState().products.forEach((item)=>{
+        const singleItem={...item};
+        tempProducts=[...tempProducts, singleItem];
+    });
+    //Because we need to also change the main products list after reloading the cart from local storage or after reloading even though a item will be in the cart but in the main products list showed it will appear as new means with "inCart=false" and "count=0"
+    for(let i=0; i<tempProducts.length; i++){
+        for(let j=0; j<tempCart.length;j++){
+            if(tempCart[j].id===tempProducts[i].id){
+                tempProducts[i]={...tempCart[j]};
+                break;
+            }
+        }
+    }
+    console.log('tempProducts',tempProducts);
+
     const cartSubtotal=localStorage.getItem('cartSubtotal');
     const cartTax=localStorage.getItem('cartTax');
     const cartTotal=localStorage.getItem('cartTotal');
 
     return (dispatch)=>{
-        dispatch(reloadedCart(tempCart, cartSubtotal, cartTax, cartTotal))
+        dispatch(reloadedCart(tempProducts, tempCart, cartSubtotal, cartTax, cartTotal))
     }
 };
-const reloadedCart=(tempCart, cartSubtotal, cartTax, cartTotal)=>{
+const reloadedCart=(tempProducts, tempCart, cartSubtotal, cartTax, cartTotal)=>{
     return {
         type:actionTypeName.RELOAD_CART,
+        products:tempProducts,
         cart:tempCart,
         cartSubtotal:cartSubtotal,
         cartTax:cartTax,

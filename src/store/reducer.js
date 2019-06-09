@@ -76,6 +76,7 @@ const reducer=(state=initialState, action)=>{
         case actionTypeName.RELOAD_CART:
             return {
                 ...state,
+                products:action.products,
                 cart:action.cart,
                 cartSubtotal:action.cartSubtotal,
                 cartTax:action.cartTax,
