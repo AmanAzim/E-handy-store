@@ -5,13 +5,13 @@ import * as actions from '../../store/actions';
 const CartItem = (props) => {
 
     //const {id, title, img, price, total, count}=props.cart[props.index]; //If we use Promise in action creator then we don't need to extract current item/product info from cart like this
-    const {id, title, img, price, total, count}=props.item;
+    const {id, title, imgUrl, price, total, count}=props.item;
 
     return (
         <div className="row my-2 text-center text-capitalize">
             {/*Image Col*/}
             <div className="col-10 col-lg-2 mx-auto">
-                <img src={img} style={{width:'5rem',height:'5rem'}} className="img-fluid" alt="Product Image" />
+                <img src={imgUrl} style={{width:'5rem',height:'5rem'}} className="img-fluid" alt="Product Image" />
             </div>
 
             {/*Product Col*/}

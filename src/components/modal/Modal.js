@@ -15,7 +15,7 @@ class Modal extends Component {
         //console.log(this.props.location);//Will give the full path address of current route
         //console.log(this.props.match);//Will give the path address that matches to all the paths
         //console.log(this.props.history);
-        const {img, title, price}=this.props.modalProduct;
+        const {imgUrl, title, price}=this.props.modalProduct;
 
         let modal=(
                 <div className="ModalContainer">
@@ -23,7 +23,7 @@ class Modal extends Component {
                         <div className="row">
                             <div className="col-8 col-md-6 col-lg-4 p-5 mx-auto text-center" id="modal">
                                 <h5>Item added to the cart</h5>
-                                <img src={img} className="img-fluid" alt="Product Image"></img>
+                                <img src={imgUrl} className="img-fluid" alt="Product Image"></img>
                                 <h5>{title}</h5>
                                 <h5 className="text-muted">Price: ${price}</h5>
 

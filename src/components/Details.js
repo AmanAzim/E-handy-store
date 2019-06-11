@@ -7,7 +7,7 @@ import * as actions from "../store/actions";
 class Details extends Component {
 
     render() {
-        const {id, title, company, info, img, price, inCart}=this.props.detailProduct;
+        const {id, title, company, info, imgUrl, price, inCart}=this.props.detailProduct;
         return (
             <div className="container py-2">
                 {/*Title*/}
@@ -20,7 +20,7 @@ class Details extends Component {
                 {/*Product details*/}
                 <div className="row">
                     <div className="col-10 mx-auto my-3 col-md-6">
-                        <img src={img} alt="Product image" className="img-fluid"/>
+                        <img src={imgUrl} alt="Product image" className="img-fluid"/>
                     </div>
 
                     <div className="col-10 mx-auto my-3 col-md-6 text-capitalize">
