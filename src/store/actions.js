@@ -8,7 +8,7 @@ export const asyn_setProducts=()=>{
     return (dispatch)=>{
         let serverProducts=[];
 
-        axios.get('https://e-handy-store.firebaseio.com/storeProducts.json')
+        axios.get(process.env.REACT_APP_SERVER)
             .then(res=>{
                 serverProducts=res.data;
                 console.log('serveradata',serverProducts);
