@@ -4,7 +4,7 @@ import {ButtonContainerDark} from './Button';
 import {connect} from 'react-redux';
 import * as actions from "../store/actions";
 
-class Details extends Component {
+export class Details extends Component {
 
     render() {
         const {id, title, company, info, imgUrl, price, inCart}=this.props.detailProduct;
